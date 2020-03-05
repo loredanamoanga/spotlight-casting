@@ -26,7 +26,7 @@ from flask_migrate import Migrate
 from models import Actor
 
 app = Flask(__name__)
-app.config.from_object(Config)
+app.config.from_object(Config.SQLALCHEMY_DATABASE_URI)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 print('hello there')
