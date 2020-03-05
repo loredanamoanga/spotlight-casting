@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, abort, jsonify
+from flask import Flask, request, abort, jsonify, json
 from flask_migrate import Migrate
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
@@ -28,18 +28,41 @@ CORS(app)
 
 @app.route('/actors', methods=['GET'])
 def get_actors():
-    actors = map(lambda drink: drink.short(), Actor.query.all())
+    actors = map(lambda actor: actor.format(), Actor.query.all())
     if actors:
         return jsonify({"success": True, "actors": list(actors)})
     return "Actors not implemented"
 
+
 @app.route('/movies', methods=['GET'])
 def get_movies():
-    movies = map(lambda drink: drink.short(), Movie.query.all())
+    movies = map(lambda actor: actor.format(), Movie.query.all())
     if movies:
         return jsonify({"success": True, "movies": list(movies)})
     return "Actors not implemented"
 
+
+@app.route('/actors', methods=['POST'])
+# @requires_auth('post:actors')
+def create_actor():
+    body = request.get_json(force=True)
+    req_name = body.get('name', None)
+    req_age = body.get('age', None)
+    req_gender = body.get('gender', None)
+
+    try:
+        actor = Actor(name=req_name, age=req_age, gender=req_gender)
+        if actor is None:
+            abort(404)
+
+        actor.insert()
+        actors = map(lambda actor: actor.format(), Actor.query.all())
+
+        if actors:
+            return jsonify({"success": True, "actors": list(actors)})
+        return "Actors not implemented"
+    except:
+        abort(422)
 
 
 if __name__ == '__main__':
