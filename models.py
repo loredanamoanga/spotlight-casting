@@ -51,7 +51,7 @@ class Actor(db.Model):
         db.session.commit()
 
     def __repr__(self):
-        return json.dumps(self.short())
+        return json.dumps(self.format())
 
 
 class Movie(db.Model):
@@ -79,7 +79,7 @@ class Movie(db.Model):
         db.session.commit()
 
     def __repr__(self):
-        return json.dumps(self.short())
+        return json.dumps(self.format())
 
 
 # class Masterpieces(db.Model):
