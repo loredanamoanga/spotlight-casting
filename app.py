@@ -5,28 +5,15 @@ from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
-import dateutil.parser
-import babel
 from flask import (
-    Flask,
-    render_template,
-    request,
-    flash,
-    redirect,
-    url_for)
-from flask_moment import Moment
+    Flask)
 from flask_sqlalchemy import SQLAlchemy
-import logging
-from logging import Formatter, FileHandler
-from sqlalchemy.exc import SQLAlchemyError
-# from forms import *
-from config import Config
 from flask_migrate import Migrate
 
 from models import Actor
 
 app = Flask(__name__)
-app.config.from_object(Config.SQLALCHEMY_DATABASE_URI)
+app.config.from_object('config')
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 print('hello there')

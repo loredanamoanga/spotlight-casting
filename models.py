@@ -1,6 +1,7 @@
 from sqlalchemy import Column, String, Integer, ForeignKey, DateTime
 import json
 from app import db
+
 db_id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
 db_name = Column(String(180), unique=True)
 
