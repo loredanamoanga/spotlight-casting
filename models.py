@@ -37,7 +37,6 @@ class Actor(db.Model):
 
     def format(self):
         return {
-            'id': self.id,
             'name': self.name,
             'age': self.age,
             'gender': self.gender
@@ -65,7 +64,6 @@ class Movie(db.Model):
 
     def format(self):
         return {
-            'id': self.id,
             'title': self.title,
             'release_date': self.release_date
         }
@@ -86,7 +84,6 @@ class Movie(db.Model):
 
 
 class Masterpieces(db.Model):
-    id = db_id,
     actor_id = Column('id', ForeignKey('actor.id'),
                       primary_key=True, autoincrement='ignore_fk')
     movie_id = Column('id', ForeignKey('movie.id'),
