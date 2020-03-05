@@ -24,17 +24,18 @@ from flask_migrate import Migrate
 
 
 def create_app(test_config=None):
-  # create and configure the app
-  app = Flask(__name__)
-  app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-  moment = Moment(app)
-  app.config.from_object('config')
-  db = SQLAlchemy(app)
-  migrate = Migrate(app, db)
+    # create and configure the app
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    moment = Moment(app)
+    app.config.from_object('config')
+    db = SQLAlchemy(app)
+    migrate = Migrate(app, db)
+    print('hello there')
+    CORS(app)
 
-  CORS(app)
+    return app
 
-  return app
 
 APP = create_app()
 
