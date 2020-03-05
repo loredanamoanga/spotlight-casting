@@ -1,9 +1,6 @@
-import psycopg2
-from sqlalchemy import Column, String, Integer, ForeignKey
-from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Column, String, Integer, ForeignKey, DateTime
 import json
 from app import db
-from datetime import datetime
 db_id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
 db_name = Column(String(180), unique=True)
 
@@ -45,7 +42,7 @@ class Actor(db.Model):
 class Movie(db.Model):
     id = db_id
     name = db_name
-    release_date = Column(db.DateTime, nullable=False)
+    release_date = Column(DateTime, nullable=False)
 
     def format(self):
         return {
