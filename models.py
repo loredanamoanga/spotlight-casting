@@ -94,7 +94,6 @@ class Masterpieces(db.Model):
 
     def format(self):
         return {
-            'id': self.id,
             'actor_id': self.actor_id,
             'movie_id': self.movie_id,
         }
