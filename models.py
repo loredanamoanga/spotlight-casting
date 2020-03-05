@@ -1,5 +1,4 @@
 import os
-
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, String, Integer, ForeignKey, DateTime
 import json
@@ -57,8 +56,6 @@ class Actor(db.Model):
     def update(self):
         db.session.commit()
 
-    def __repr__(self):
-        return json.dumps(self.format())
 
 
 class Movie(db.Model):
@@ -82,8 +79,7 @@ class Movie(db.Model):
     def update(self):
         db.session.commit()
 
-    def __repr__(self):
-        return json.dumps(self.format())
+
 
 
 class Masterpieces(db.Model):
@@ -128,5 +124,4 @@ class Masterpieces(db.Model):
     def update(self):
         db.session.commit()
 
-    def __repr__(self):
-        return json.dumps(self.format())
+
