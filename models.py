@@ -50,6 +50,9 @@ class Actor(db.Model):
     def update(self):
         db.session.commit()
 
+    def __repr__(self):
+        return json.dumps(self.short())
+
 
 class Movie(db.Model):
     __tablename__ = 'movies'
@@ -74,6 +77,9 @@ class Movie(db.Model):
 
     def update(self):
         db.session.commit()
+
+    def __repr__(self):
+        return json.dumps(self.short())
 
 
 # class Masterpieces(db.Model):
