@@ -9,4 +9,4 @@ DEBUG = True
 # Connect to the database
 
 
-SQLALCHEMY_DATABASE_URI = 'postgresql://loredanamoanga@localhost:5432/fyyur'
+SQLALCHEMY_DATABASE_URL = os.environ.get('DATABASE_URL')
