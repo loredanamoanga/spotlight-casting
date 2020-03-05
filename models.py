@@ -3,9 +3,9 @@ from sqlalchemy import Column, String, Integer, ForeignKey
 from flask_sqlalchemy import SQLAlchemy
 import json
 from app import db
-
+from datetime import datetime
 db_id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
-db_name = Column(String(80), unique=True)
+db_name = Column(String(180), unique=True)
 
 
 def db_drop_and_create_all():
@@ -16,6 +16,8 @@ def db_drop_and_create_all():
 class Actor(db.Model):
     id = db_id
     name = db_name
+    age = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
+    gender = Column(String(180), unique=True)
 
     def format(self):
         return {
@@ -43,6 +45,7 @@ class Actor(db.Model):
 class Movie(db.Model):
     id = db_id
     name = db_name
+    release_date = Column(db.DateTime, nullable=False)
 
     def format(self):
         return {
