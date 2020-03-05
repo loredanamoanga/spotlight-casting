@@ -13,7 +13,9 @@ from flask_migrate import Migrate
 from models import Actor
 
 app = Flask(__name__)
-app.config.from_object('config')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+moment = Moment(app)
+app.config.from_object(' ')
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 print('hello there')
