@@ -23,6 +23,8 @@ from sqlalchemy.exc import SQLAlchemyError
 from config import Config
 from flask_migrate import Migrate
 
+from models import Actor
+
 app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
@@ -30,6 +32,13 @@ migrate = Migrate(app, db)
 print('hello there')
 CORS(app)
 
+
+@app.route('/actors', methods=['GET'])
+def get_actors():
+    actors = map(lambda drink: drink.short(), Actor.query.all())
+    if actors:
+        return jsonify({"success": True, "actors": list(actors)})
+    return "Actors not implemented"
 
 
 if __name__ == '__main__':
