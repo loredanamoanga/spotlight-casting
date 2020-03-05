@@ -10,7 +10,7 @@ from flask import (
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
-from models import Actor, db, db_drop_and_create_all
+from models import Actor, db, db_drop_and_create_all, Movie
 
 app = Flask(__name__)
 # app.config.from_object('config.Development')
@@ -32,6 +32,14 @@ def get_actors():
     if actors:
         return jsonify({"success": True, "actors": list(actors)})
     return "Actors not implemented"
+
+@app.route('/movies', methods=['GET'])
+def get_movies():
+    movies = map(lambda drink: drink.short(), Movie.query.all())
+    if movies:
+        return jsonify({"success": True, "movies": list(movies)})
+    return "Actors not implemented"
+
 
 
 if __name__ == '__main__':
