@@ -2,15 +2,8 @@ import psycopg2
 from sqlalchemy import Column, String, Integer, ForeignKey
 from flask_sqlalchemy import SQLAlchemy
 import json
+from app import db
 
-import app
-import config
-
-DATABASE_URL = config.SQLALCHEMY_DATABASE_URL,
-
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-
-db = SQLAlchemy(app.create_app())
 db_id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
 db_name = Column(String(80), unique=True)
 
