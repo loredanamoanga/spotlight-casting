@@ -25,7 +25,8 @@ def setup_db(app):
 
 
 # db_id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
-db_name = Column(String(180), unique=True)
+db_string = Column(String(180), unique=True)
+db_integer = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
 
 
 def db_drop_and_create_all():
@@ -34,8 +35,8 @@ def db_drop_and_create_all():
 
 
 class Actor(db.Model):
-    name = db_name
-    age = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
+    name = db_string
+    age = db_integer
     gender = Column(String(180), unique=True)
 
     def format(self):
@@ -61,7 +62,7 @@ class Actor(db.Model):
 
 
 class Movie(db.Model):
-    name = db_name
+    title = db_string
     release_date = Column(DateTime, nullable=False)
 
     def format(self):
@@ -90,7 +91,7 @@ class Masterpieces(db.Model):
                       primary_key=True, autoincrement='ignore_fk')
     movie_id = Column('id', ForeignKey('movie.id'),
                       primary_key=True, autoincrement='ignore_fk')
-    title = Column(String(80), unique=True)
+    title = db_string
 
     def format(self):
         return {
