@@ -10,14 +10,11 @@ from flask import (
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
-from models import Actor
+from models import Actor, setup_db
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-moment = Moment(app)
-app.config.from_object(' ')
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+app.config["DEBUG"] = True
+setup_db(app)
 print('hello there')
 CORS(app)
 

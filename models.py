@@ -1,6 +1,24 @@
+import os
+
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, String, Integer, ForeignKey, DateTime
 import json
-from app import db
+SECRET_KEY = os.urandom(32)
+project_dir = os.path.abspath(os.path.dirname(__file__))
+database_path = os.environ.get('DATABASE_URL') or \
+                          'sqlite:///' + os.path.join(basedir, 'app.db')
+
+db = SQLAlchemy()
+
+'''
+setup_db(app)
+    binds a flask application and a SQLAlchemy service
+'''
+def setup_db(app):
+    app.config["SQLALCHEMY_DATABASE_URI"] = database_path
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    db.app = app
+    db.init_app(app)
 
 db_id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
 db_name = Column(String(180), unique=True)
