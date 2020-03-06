@@ -1,20 +1,11 @@
 import os
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, String, Integer, autoincrement=True, ForeignKey, DateTime
+from sqlalchemy import Column, String, Integer
 import json
 
 SECRET_KEY = os.urandom(32)
 project_dir = os.path.abspath(os.path.dirname(__file__))
 database_path = os.environ.get('DATABASE_URL')
-db = SQLAlchemy()
-
-'''
-setup_db(app)
-    binds a flask application and a SQLAlchemy service
-'''
-
-from flask_sqlalchemy import SQLAlchemy
-
 db = SQLAlchemy()
 
 
