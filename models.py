@@ -17,9 +17,9 @@ def db_drop_and_create_all():
 class Actor(db.Model):
     __tablename__ = 'actors'
     id = Column(Integer, autoincrement=True, primary_key=True)
-    name = Column(String, nullable=False)
-    age = Column(Integer, nullable=False)
-    gender = Column(String, nullable=False)
+    name = Column(String)
+    age = Column(Integer)
+    gender = Column(String)
 
     def format(self):
         return {

@@ -52,7 +52,7 @@ def create_actor():
     req_name = body.get('name', None)
     req_age = body.get('age', None)
     req_gender = body.get('gender', None)
-    print(body)
+    print(body, body.get('age'))
 
     try:
         actor = Actor(id=req_id, name=req_name, age=req_age, gender=req_gender)
