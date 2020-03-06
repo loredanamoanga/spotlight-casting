@@ -60,8 +60,8 @@ def create_actor():
             abort(404)
 
         actor.insert()
-        actors = map(lambda actor: actor.format(), Actor.query.all())
-
+        actors = map(lambda actor1: actor.format(), Actor.query.all())
+        print(actors, Actor, "actors")
         if actors:
             return jsonify({"success": True, "actors": list(actors)})
         return "Actors not implemented"

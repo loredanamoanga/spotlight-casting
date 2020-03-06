@@ -22,7 +22,6 @@ class Actor(db.Model):
     gender = Column(String)
 
     def format(self):
-        print(self, "self")
         return {
             "id": self.id,
             "name": self.name,
@@ -71,6 +70,7 @@ class Movie(db.Model):
 
     def __repr__(self):
         return json.dumps(self.format())
+
 
 # class Masterpieces(db.Model):
 #     __tablename__ = 'masterpieces'
