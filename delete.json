@@ -1,11 +1,12 @@
 {
   "actors": [
     {
-      "id": "1",
-      "name": "Brad Pitt",
-      "age": "52",
-      "gender": "male"
+      "id": 1,
+      "name": "john",
+      "age": 37,
+      "gender": "blue"
     }
   ],
   "success": true
 }
+

@@ -47,12 +47,14 @@ def get_movies():
 # @requires_auth('post:actors')
 def create_actor():
     body = request.get_json(force=True)
-    req_name = body.get('name', None)
-    req_age = body.get('age', None)
-    req_gender = body.get('gender', None)
+    req_id = body.get("id", None)
+    req_name = body.get("name", None)
+    req_age = body.get("age", None)
+    req_gender = body.get("gender", None)
+    print(body)
 
     try:
-        actor = Actor(name=req_name, age=req_age, gender=req_gender)
+        actor = Actor(id=req_id, name=req_name, age=req_age, gender=req_gender)
         if actor is None:
             abort(404)
 
