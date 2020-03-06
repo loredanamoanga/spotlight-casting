@@ -1,5 +1,6 @@
+import logging
 import os
-from flask import Flask, request, abort, jsonify, json, logging
+from flask import Flask, request, abort, jsonify, json
 from flask_migrate import Migrate
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
