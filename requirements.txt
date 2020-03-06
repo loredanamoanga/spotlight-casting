@@ -9,4 +9,3 @@ flask_cors
 flask_moment
 Werkzeug
 babel
-logging
