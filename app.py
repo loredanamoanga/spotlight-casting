@@ -54,7 +54,7 @@ def create_actor():
     print(body)
 
     try:
-        actor = Actor( name=req_name, age=req_age, gender=req_gender)
+        actor = Actor(name=req_name, age=req_age, gender=req_gender)
         if actor is None:
             abort(404)
 
