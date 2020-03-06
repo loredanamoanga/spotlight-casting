@@ -18,7 +18,6 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
-
 def db_drop_and_create_all():
     db.drop_all()
     db.create_all()
@@ -28,15 +27,15 @@ class Actor(db.Model):
     __tablename__ = 'actors'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    age = Column(Integer(), autoincrement=True,  primary_key=True)
+    age = Column(Integer(), autoincrement=True, primary_key=True)
     gender = db.Column(db.String)
 
     def format(self):
         return {
-            'id': self.id,
-            'name': self.name,
-            'age': self.age,
-            'gender': self.gender
+            "id": self.id,
+            "name": self.name,
+            "age": self.age,
+            "gender": self.gender
         }
 
     def insert(self):
@@ -58,13 +57,13 @@ class Movie(db.Model):
     __tablename__ = 'movies'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
-    release_date =  db.Column(db.DateTime())
+    release_date = db.Column(db.DateTime())
 
     def format(self):
         return {
-            'id': self.id,
-            'title': self.title,
-            'release_date': self.release_date
+            "id": self.id,
+            "title": self.title,
+            "release_date": self.release_date
         }
 
     def insert(self):
@@ -81,19 +80,18 @@ class Movie(db.Model):
     def __repr__(self):
         return json.dumps(self.format())
 
-
 # class Masterpieces(db.Model):
 #     __tablename__ = 'masterpieces'
 #     id = Column(Integer(), autoincrement=True, primary_key=True),
-#     actor_id = Column('id', ForeignKey('actor.id'),
+#     actor_id = Column("id", ForeignKey('actor.id'),
 #                       primary_key=True, autoincrement='ignore_fk')
-#     movie_id = Column('id', ForeignKey('movie.id'),
+#     movie_id = Column("id", ForeignKey('movie.id'),
 #                       primary_key=True, autoincrement='ignore_fk')
 #     title = db.Column(db.String)
 #
 #     def format(self):
 #         return {
-#             'id': self.id,
+#             "id": self.id,
 #             'actor_id': self.actor_id,
 #             'movie_id': self.movie_id,
 #         }
