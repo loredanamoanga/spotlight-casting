@@ -18,10 +18,11 @@ class Actor(db.Model):
     __tablename__ = 'actors'
     id = Column(Integer, autoincrement=True, primary_key=True)
     name = Column(String)
-    age = Column(Integer(), nullable=True)
+    age = Column(Integer())
     gender = Column(String)
 
     def format(self):
+        print(self, "self")
         return {
             "id": self.id,
             "name": self.name,
@@ -54,7 +55,7 @@ class Movie(db.Model):
         return {
             "id": self.id,
             "title": self.title,
-            "release_date": self.release_date
+            "release_date": str(self.release_date)
         }
 
     def insert(self):
@@ -85,6 +86,7 @@ class Movie(db.Model):
 #             "id": self.id,
 #             'actor_id': self.actor_id,
 #             'movie_id': self.movie_id,
+
 #         }
 #
 #     '''
