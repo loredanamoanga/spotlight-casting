@@ -18,7 +18,7 @@ class Actor(db.Model):
     __tablename__ = 'actors'
     id = Column(Integer, autoincrement=True, primary_key=True)
     name = Column(String)
-    age = Column(Integer(),  primary_key=True)
+    age = Column(Integer(), nullable=True)
     gender = Column(String)
 
     def format(self):
