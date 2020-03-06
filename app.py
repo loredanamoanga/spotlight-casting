@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, abort, jsonify, json
+from flask import Flask, request, abort, jsonify, json, logging
 from flask_migrate import Migrate
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
@@ -63,8 +63,8 @@ def create_actor():
         if actors:
             return jsonify({"success": True, "actors": list(actors)})
         return "Actors not implemented"
-    except:
-        abort(422)
+    except Exception as e:
+        logging.error('Error at %s', 'division', exc_info=e)
 
 
 if __name__ == '__main__':
