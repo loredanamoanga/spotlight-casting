@@ -22,7 +22,6 @@ CORS(app)
 
 db_drop_and_create_all()
 
-
 # db.create_all()
 
 @app.route('/actors', methods=['GET'])
