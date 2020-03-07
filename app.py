@@ -184,3 +184,4 @@ def remove_movie(jwt, movie_id):
         return "Movies not implemented"
     except Exception as e:
         logging.error('Error at %s', 'division', exc_info=e)
+
