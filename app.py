@@ -148,3 +148,22 @@ def edit_movie(movie_id):
         return "Movies not implemented"
     except Exception as e:
         logging.error('Error at %s', 'division', exc_info=e)
+
+
+@app.route('/actors/<int:actor_id>', methods=['DELETE'])
+# @requires_auth('delete:actors')
+def remove_actor(actor_id):
+    if actor_id is None:
+        abort(404)
+        specific_actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
+
+        if specific_actor is None:
+            abort(404)
+
+        specific_actor.delete()
+
+        actors = map(lambda actor: actor.format(), Actor.query.all())
+
+        if actors:
+            return jsonify({"success": True, "actors": list(actors)})
+        return "Actors not implemented"
