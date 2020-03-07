@@ -119,3 +119,32 @@ def edit_actor(actor_id):
         return "Actors not implemented"
     except Exception as e:
         logging.error('Error at %s', 'division', exc_info=e)
+
+
+@app.route('/movies/<int:movie_id>', methods=['PATCH'])
+# @requires_auth('patch:movies')
+def edit_movie(movie_id):
+    body = request.get_json(force=True)
+    if id is None:
+        abort(404)
+    req_title = body.get('title', None)
+    req_release_date = body.get('release_date', None)
+    try:
+        specific_movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
+
+        if specific_movie is None:
+            abort(404)
+
+        if req_title:
+            specific_movie.title = req_title
+        if req_release_date:
+            specific_movie.release_date = req_release_date
+        specific_movie.update()
+
+        movies = map(lambda movie: movie.format(), Movie.query.all())
+
+        if movies:
+            return jsonify({"success": True, "movies": list(movies)})
+        return "Movies not implemented"
+    except Exception as e:
+        logging.error('Error at %s', 'division', exc_info=e)
