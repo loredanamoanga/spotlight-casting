@@ -48,11 +48,13 @@ def get_movies():
 # @requires_auth('post:actors')
 def create_actor():
     body = request.get_json(force=True)
-    req_id = body.get('id', None)
-    req_name = body.get('name', None)
-    req_age = body.get('age', None)
-    req_gender = body.get('gender', None)
-    print(body, body.get('age'))
+    actor_detail = body.get('actors')
+    req_id = actor_detail.get('id', None)
+    req_name = actor_detail.get('name', None)
+    req_age = actor_detail.get('age', None)
+    req_gender = actor_detail.get('gender', None)
+
+    print(req_gender, actor_detail, "Details")
 
     try:
         actor = Actor(id=req_id, name=req_name, age=req_age, gender=req_gender)
@@ -67,7 +69,3 @@ def create_actor():
         return "Actors not implemented"
     except Exception as e:
         logging.error('Error at %s', 'division', exc_info=e)
-
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080, debug=True)
