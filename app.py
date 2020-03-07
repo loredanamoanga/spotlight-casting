@@ -46,13 +46,12 @@ def get_movies():
 # @requires_auth('post:actors')
 def create_actor():
     body = request.get_json(force=True)
-    req_id = body.get('id', None)
     req_name = body.get('name', None)
     req_age = body.get('age', None)
     req_gender = body.get('gender', None)
 
     try:
-        actor = Actor(id=req_id, name=req_name, age=req_age, gender=req_gender)
+        actor = Actor( name=req_name, age=req_age, gender=req_gender)
         if actor is None:
             abort(404)
 
@@ -69,12 +68,11 @@ def create_actor():
 # @requires_auth('post:movies')
 def create_movie():
     body = request.get_json(force=True)
-    req_id = body.get('id', None)
     req_title = body.get('title', None)
     req_release_date = body.get('release_date', None)
     print(body, "body")
     try:
-        movie = Movie(id=req_id, title=req_title, release_date=req_release_date)
+        movie = Movie(title=req_title, release_date=req_release_date)
         if movie is None:
             abort(404)
 
