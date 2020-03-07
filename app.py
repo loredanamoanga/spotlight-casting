@@ -48,10 +48,10 @@ def get_movies():
 # @requires_auth('post:actors')
 def create_actor():
     body = request.get_json(force=True)
-    req_id = body["id"]
-    req_name = body["name"]
-    req_age = body["age"]
-    req_gender = body["gender"]
+    req_id = body.get('id', None)
+    req_name = body.get('name', None)
+    req_age = body.get('age', None)
+    req_gender = body.get('gender', None)
 
     try:
         actor = Actor(id=req_id, name=req_name, age=req_age, gender=req_gender)
@@ -71,9 +71,9 @@ def create_actor():
 # @requires_auth('post:movies')
 def create_movie():
     body = request.get_json(force=True)
-    req_id = body["id"]
-    req_title = body["title"]
-    req_release_date = body["release_date"]
+    req_id = body.get('id', None)
+    req_title = body.get('title', None)
+    req_release_date = body.get('release_date', None)
     print(body, "body")
     try:
         movie = Movie(id=req_id, title=req_title, release_date=req_release_date)
@@ -95,9 +95,9 @@ def edit_actor(actor_id):
     body = request.get_json(force=True)
     if id is None:
         abort(404)
-    req_name = body["name"]
-    req_age = body["age"]
-    req_gender = body["gender"]
+    req_name = body.get('name', None)
+    req_age = body.get('age', None)
+    req_gender = body.get('gender', None)
     try:
         specific_actor = Actor.query.filter(Actor.id == actor_id, Actor.id != '').one_or_none()
 
