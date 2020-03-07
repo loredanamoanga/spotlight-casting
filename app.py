@@ -18,8 +18,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.app = app
 print(os.environ.get('DATABASE_URL'))
-db.init_app(app)
 db_drop_and_create_all()
+db.init_app(app)
 # db.create_all()
 
 migrate = Migrate(app, db)
