@@ -14,8 +14,6 @@ from flask_migrate import Migrate
 from models import Actor, db, db_drop_and_create_all, Movie
 
 app = Flask(__name__)
-# app.config.from_object('config.Development')
-# app.config.from_object('config.Config')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.app = app
@@ -170,7 +168,6 @@ def remove_actor(actor_id):
         return "Actors not implemented"
     except Exception as e:
         logging.error('Error at %s', 'division', exc_info=e)
-
 
 
 @app.route('/movies/<int:movie_id>', methods=['DELETE'])
