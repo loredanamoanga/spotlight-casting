@@ -95,7 +95,6 @@ def edit_actor(actor_id):
     body = request.get_json(force=True)
     if id is None:
         abort(404)
-    req_id = body["id"]
     req_name = body["name"]
     req_age = body["age"]
     req_gender = body["gender"]
