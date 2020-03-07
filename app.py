@@ -10,7 +10,7 @@ from flask import (
     Flask)
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from .auth import AuthError, requires_auth
+# from .auth.auth import AuthError, requires_auth
 
 from models import Actor, db, db_drop_and_create_all, Movie, setup_db
 
