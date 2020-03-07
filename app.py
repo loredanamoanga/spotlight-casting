@@ -55,7 +55,7 @@ def create_actor():
             abort(404)
 
         actor.insert()
-        actors = map(lambda actor_formatted: actor.format(), Actor.query.all())
+        actors = map(lambda actor: actor.format(), Actor.query.all())
         if actors:
             return jsonify({"success": True, "actors": list(actors)})
         return "Actors not implemented"
@@ -76,7 +76,7 @@ def create_movie():
             abort(404)
 
         movie.insert()
-        movies = map(lambda movie_formatted: movie.format(), Movie.query.all())
+        movies = map(lambda movie: movie.format(), Movie.query.all())
         if movies:
             return jsonify({"success": True, "movies": list(movies)})
         return "Actors not implemented"
