@@ -68,13 +68,13 @@ def create_actor():
 
 
 @app.route('/movies', methods=['POST'])
-# @requires_auth('post:actors')
+# @requires_auth('post:movies')
 def create_movie():
     body = request.get_json(force=True)
     req_id = body["id"]
     req_title = body["title"]
     req_release_date = body["release_date"]
-
+    print(body, "body")
     try:
         movie = Movie(id=req_id, title=req_title, release_date=req_release_date)
         if movie is None:
@@ -83,7 +83,7 @@ def create_movie():
         movie.insert()
         movies = map(lambda movie_formatted: movie.format(), Movie.query.all())
         if movies:
-            return jsonify({"success": True, "actors": list(movies)})
+            return jsonify({"success": True, "movies": list(movies)})
         return "Actors not implemented"
     except Exception as e:
         logging.error('Error at %s', 'division', exc_info=e)
