@@ -11,19 +11,20 @@ from flask import (
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
-from models import Actor, db, db_drop_and_create_all, Movie
+from models import Actor, db, db_drop_and_create_all, Movie, setup_db
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db.app = app
-db.init_app(app)
-db_drop_and_create_all()
-# db.create_all()
-
+app.config["DEBUG"] = True
+setup_db(app)
 migrate = Migrate(app, db)
 CORS(app)
 
+
+
+db_drop_and_create_all()
+
+
+# db.create_all()
 
 @app.route('/actors', methods=['GET'])
 def get_actors():
