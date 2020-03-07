@@ -155,6 +155,7 @@ def edit_movie(movie_id):
 def remove_actor(actor_id):
     if actor_id is None:
         abort(404)
+    try:
         specific_actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
 
         if specific_actor is None:
@@ -167,3 +168,5 @@ def remove_actor(actor_id):
         if actors:
             return jsonify({"success": True, "actors": list(actors)})
         return "Actors not implemented"
+    except Exception as e:
+        logging.error('Error at %s', 'division', exc_info=e)
