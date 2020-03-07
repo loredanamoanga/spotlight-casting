@@ -108,7 +108,7 @@ def edit_actor(actor_id):
         specific_actor.gender = req_gender
         specific_actor.update()
 
-        actors = map(lambda actor: actor.long(), Actor.query.all())
+        actors = map(lambda actor: actor.format(), Actor.query.all())
 
         if actors:
             return jsonify({"success": True, "actors": list(actors)})
