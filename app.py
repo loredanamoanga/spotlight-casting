@@ -53,18 +53,37 @@ def create_actor():
     req_age = body["age"]
     req_gender = body["gender"]
 
-    print(req_gender, body, "Details")
-
     try:
         actor = Actor(id=req_id, name=req_name, age=req_age, gender=req_gender)
         if actor is None:
             abort(404)
 
         actor.insert()
-        actors = map(lambda actor1: actor.format(), Actor.query.all())
-        print(actor.format(), "actors")
+        actors = map(lambda actor_formatted: actor.format(), Actor.query.all())
         if actors:
             return jsonify({"success": True, "actors": list(actors)})
+        return "Actors not implemented"
+    except Exception as e:
+        logging.error('Error at %s', 'division', exc_info=e)
+
+
+@app.route('/movies', methods=['POST'])
+# @requires_auth('post:actors')
+def create_movie():
+    body = request.get_json(force=True)
+    req_id = body["id"]
+    req_title = body["title"]
+    req_release_date = body["release_date"]
+
+    try:
+        movie = Movie(id=req_id, title=req_title, release_date=req_release_date)
+        if movie is None:
+            abort(404)
+
+        movie.insert()
+        movies = map(lambda movie_formatted: movie.format(), Movie.query.all())
+        if movies:
+            return jsonify({"success": True, "actors": list(movies)})
         return "Actors not implemented"
     except Exception as e:
         logging.error('Error at %s', 'division', exc_info=e)
