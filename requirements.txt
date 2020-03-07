@@ -1,4 +1,3 @@
-jose
 gunicorn
 flask
 flask_sqlalchemy
@@ -10,3 +9,4 @@ flask_cors
 flask_moment
 Werkzeug
 babel
+python-jose-cryptodome
