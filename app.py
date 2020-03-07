@@ -89,31 +89,31 @@ def create_movie():
         logging.error('Error at %s', 'division', exc_info=e)
 
 
-@app.route('/actors/<int:actor_id>', methods=['PATCH'])
-# @requires_auth('patch:actors')
-def edit_actor(actor_id):
-    body = request.get_json(force=True)
-    if id is None:
-        abort(404)
-    req_id = body["id"]
-    req_name = body["name"]
-    req_age = body["age"]
-    req_gender = body["gender"]
-    try:
-        specific_actor = Actor.query.filter(Actor.id == actor_id, Actor.id != '').one_or_none()
-
-        if specific_actor is None:
-            abort(404)
-        specific_actor.id = req_id
-        specific_actor.name = req_name
-        specific_actor.age = req_age
-        specific_actor.gender = req_gender
-        specific_actor.update()
-
-        actors = map(lambda actor: actor.long(), Actor.query.all())
-
-        if actors:
-            return jsonify({"success": True, "actors": list(actors)})
-        return "Actors not implemented"
-    except Exception as e:
-        logging.error('Error at %s', 'division', exc_info=e)
+# @app.route('/actors/<int:actor_id>', methods=['PATCH'])
+# # @requires_auth('patch:actors')
+# def edit_actor(actor_id):
+#     body = request.get_json(force=True)
+#     if id is None:
+#         abort(404)
+#     req_id = body["id"]
+#     req_name = body["name"]
+#     req_age = body["age"]
+#     req_gender = body["gender"]
+#     try:
+#         specific_actor = Actor.query.filter(Actor.id == actor_id, Actor.id != '').one_or_none()
+#
+#         if specific_actor is None:
+#             abort(404)
+#         specific_actor.id = req_id
+#         specific_actor.name = req_name
+#         specific_actor.age = req_age
+#         specific_actor.gender = req_gender
+#         specific_actor.update()
+#
+#         actors = map(lambda actor: actor.long(), Actor.query.all())
+#
+#         if actors:
+#             return jsonify({"success": True, "actors": list(actors)})
+#         return "Actors not implemented"
+#     except Exception as e:
+#         logging.error('Error at %s', 'division', exc_info=e)
