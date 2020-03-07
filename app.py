@@ -103,9 +103,13 @@ def edit_actor(actor_id):
 
         if specific_actor is None:
             abort(404)
-        specific_actor.name = req_name
-        specific_actor.age = req_age
-        specific_actor.gender = req_gender
+
+        if req_name:
+            specific_actor.name = req_name
+        if req_age:
+            specific_actor.age = req_age
+        if req_gender:
+            specific_actor.gender = req_gender
         specific_actor.update()
 
         actors = map(lambda actor: actor.format(), Actor.query.all())
