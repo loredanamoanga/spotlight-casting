@@ -104,7 +104,6 @@ def edit_actor(actor_id):
 
         if specific_actor is None:
             abort(404)
-        specific_actor.id = req_id
         specific_actor.name = req_name
         specific_actor.age = req_age
         specific_actor.gender = req_gender
