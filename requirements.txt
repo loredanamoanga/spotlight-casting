@@ -1,3 +1,4 @@
+jose
 gunicorn
 flask
 flask_sqlalchemy

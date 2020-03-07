@@ -1,17 +1,12 @@
 import logging
-import os
-from flask import Flask, request, abort, jsonify, json
-from flask_migrate import Migrate
-from flask_moment import Moment
-from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
 
 from flask import (
     Flask)
-from flask_sqlalchemy import SQLAlchemy
+from flask import request, abort, jsonify
+from flask_cors import CORS
 from flask_migrate import Migrate
-# from .auth.auth import AuthError, requires_auth
 
+from auth import requires_auth
 from models import Actor, db, db_drop_and_create_all, Movie, setup_db
 
 app = Flask(__name__)
@@ -21,6 +16,7 @@ migrate = Migrate(app, db)
 CORS(app)
 
 db_drop_and_create_all()
+
 
 # db.create_all()
 
@@ -41,7 +37,7 @@ def get_movies():
 
 
 @app.route('/actors', methods=['POST'])
-# @requires_auth('post:actors')
+@requires_auth('post:actors')
 def create_actor():
     body = request.get_json(force=True)
     req_name = body.get('name', None)
