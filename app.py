@@ -48,13 +48,12 @@ def get_movies():
 # @requires_auth('post:actors')
 def create_actor():
     body = request.get_json(force=True)
-    actor_detail = body.get('actors')
-    req_id = actor_detail.get('id', None)
-    req_name = actor_detail.get('name', None)
-    req_age = actor_detail.get('age', None)
-    req_gender = actor_detail.get('gender', None)
+    req_id = body['id']
+    req_name = body['name']
+    req_age = body['age']
+    req_gender =body['gender']
 
-    print(req_gender, actor_detail, "Details")
+    print(req_gender, body, "Details")
 
     try:
         actor = Actor(id=req_id, name=req_name, age=req_age, gender=req_gender)
