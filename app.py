@@ -10,6 +10,7 @@ from flask import (
     Flask)
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from .auth import AuthError, requires_auth
 
 from models import Actor, db, db_drop_and_create_all, Movie, setup_db
 
@@ -18,8 +19,6 @@ app.config["DEBUG"] = True
 setup_db(app)
 migrate = Migrate(app, db)
 CORS(app)
-
-
 
 db_drop_and_create_all()
 
@@ -43,7 +42,7 @@ def get_movies():
 
 
 @app.route('/actors', methods=['POST'])
-# @requires_auth('post:actors')
+@requires_auth('post:actors')
 def create_actor():
     body = request.get_json(force=True)
     req_name = body.get('name', None)
@@ -51,7 +50,7 @@ def create_actor():
     req_gender = body.get('gender', None)
 
     try:
-        actor = Actor( name=req_name, age=req_age, gender=req_gender)
+        actor = Actor(name=req_name, age=req_age, gender=req_gender)
         if actor is None:
             abort(404)
 
@@ -65,7 +64,7 @@ def create_actor():
 
 
 @app.route('/movies', methods=['POST'])
-# @requires_auth('post:movies')
+@requires_auth('post:movies')
 def create_movie():
     body = request.get_json(force=True)
     req_title = body.get('title', None)
@@ -86,7 +85,7 @@ def create_movie():
 
 
 @app.route('/actors/<int:actor_id>', methods=['PATCH'])
-# @requires_auth('patch:actors')
+@requires_auth('patch:actors')
 def edit_actor(actor_id):
     body = request.get_json(force=True)
     if id is None:
@@ -118,7 +117,7 @@ def edit_actor(actor_id):
 
 
 @app.route('/movies/<int:movie_id>', methods=['PATCH'])
-# @requires_auth('patch:movies')
+@requires_auth('patch:movies')
 def edit_movie(movie_id):
     body = request.get_json(force=True)
     if id is None:
@@ -147,7 +146,7 @@ def edit_movie(movie_id):
 
 
 @app.route('/actors/<int:actor_id>', methods=['DELETE'])
-# @requires_auth('delete:actors')
+@requires_auth('delete:actors')
 def remove_actor(actor_id):
     if actor_id is None:
         abort(404)
@@ -169,7 +168,7 @@ def remove_actor(actor_id):
 
 
 @app.route('/movies/<int:movie_id>', methods=['DELETE'])
-# @requires_auth('delete:movies')
+@requires_auth('delete:movies')
 def remove_movie(movie_id):
     if movie_id is None:
         abort(404)

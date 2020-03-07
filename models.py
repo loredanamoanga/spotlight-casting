@@ -3,11 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, String, Integer
 import json
 
-
 SECRET_KEY = os.urandom(32)
 project_dir = os.path.abspath(os.path.dirname(__file__))
 database_path = os.environ.get('DATABASE_URL')
 db = SQLAlchemy()
+
 
 def setup_db(app):
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
@@ -17,6 +17,7 @@ def setup_db(app):
 
 
 def db_drop_and_create_all():
+    print("i am being called")
     db.drop_all()
     db.create_all()
 
@@ -77,7 +78,6 @@ class Movie(db.Model):
 
     def __repr__(self):
         return json.dumps(self.format())
-
 
 # class Masterpieces(db.Model):
 #     __tablename__ = 'masterpieces'
