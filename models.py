@@ -3,12 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, String, Integer
 import json
 
-from app import app
 
 SECRET_KEY = os.urandom(32)
 project_dir = os.path.abspath(os.path.dirname(__file__))
 database_path = os.environ.get('DATABASE_URL')
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
 
 def db_drop_and_create_all():
