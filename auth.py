@@ -6,7 +6,7 @@ from flask import request
 from flask.json import jsonify
 from jose import jwt
 
-AUTH0_DOMAIN = 'ddev-mnl4i20y.eu.auth0.com'
+AUTH0_DOMAIN = 'dev-mnl4i20y.eu.auth0.com'
 ALGORITHMS = ['RS256']
 API_AUDIENCE = 'spotlight'
 
@@ -107,7 +107,7 @@ def check_permissions(permission, payload):
 
 
 def verify_decode_jwt(token):
-    jsonurl = urlopen(f'https://ddev-mnl4i20y.eu.auth0.com/.well-known/jwks.json')
+    jsonurl = urlopen(f'https://{AUTH0_DOMAIN}/.well-known/jwks.json')
     jwks = json.loads(jsonurl.read())
     unverified_header = jwt.get_unverified_header(token)
     rsa_key = {}
