@@ -6,7 +6,7 @@ from flask import request, abort, jsonify
 from flask_cors import CORS
 from flask_migrate import Migrate
 
-from auth import requires_auth
+from auth import requires_auth, AuthError
 from models import Actor, db, db_drop_and_create_all, Movie, setup_db
 
 app = Flask(__name__)
@@ -185,3 +185,27 @@ def remove_movie(jwt, movie_id):
     except Exception as e:
         logging.error('Error at %s', 'division', exc_info=e)
 
+
+@app.errorhandler(404)
+def not_found(error):
+    return jsonify({
+        "success": False,
+        "error": 404,
+        "message": "resource not found"
+    }), 404
+
+
+@app.errorhandler(422)
+def unprocessable(error):
+    return jsonify({
+        "success": False,
+        "error": 422,
+        "message": "Unprocessable"
+    }), 422
+
+
+@app.errorhandler(AuthError)
+def handle_auth_error(ex):
+    response = jsonify(ex.error)
+    response.status_code = ex.status_code
+    return response
