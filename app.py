@@ -99,7 +99,7 @@ def edit_actor(actor_id):
     req_age = body.get('age', None)
     req_gender = body.get('gender', None)
     try:
-        specific_actor = Actor.query.filter(Actor.id == actor_id, Actor.id != '').one_or_none()
+        specific_actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
 
         if specific_actor is None:
             abort(404)
