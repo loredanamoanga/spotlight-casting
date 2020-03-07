@@ -170,3 +170,26 @@ def remove_actor(actor_id):
         return "Actors not implemented"
     except Exception as e:
         logging.error('Error at %s', 'division', exc_info=e)
+
+
+
+@app.route('/movies/<int:movie_id>', methods=['DELETE'])
+# @requires_auth('delete:movies')
+def remove_movie(movie_id):
+    if movie_id is None:
+        abort(404)
+    try:
+        specific_movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
+
+        if specific_movie is None:
+            abort(404)
+
+        specific_movie.delete()
+
+        movies = map(lambda movie: movie.format(), Movie.query.all())
+
+        if movies:
+            return jsonify({"success": True, "movies": list(movies)})
+        return "Movies not implemented"
+    except Exception as e:
+        logging.error('Error at %s', 'division', exc_info=e)
