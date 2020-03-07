@@ -91,7 +91,7 @@ def create_movie():
 
 @app.route('/actors/<int:actor_id>', methods=['PATCH'])
 # @requires_auth('patch:actors')
-def edit_actor(jwt, actor_id):
+def edit_actor(actor_id):
     body = request.get_json(force=True)
     if id is None:
         abort(404)
