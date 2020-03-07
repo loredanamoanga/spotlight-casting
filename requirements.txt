@@ -1,6 +1,7 @@
 gunicorn
 flask
 flask_sqlalchemy
+Flask-RESTful
 SQLAlchemy
 flask_script
 flask_migrate
