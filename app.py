@@ -21,7 +21,8 @@ db_drop_and_create_all()
 # db.create_all()
 
 @app.route('/actors', methods=['GET'])
-def get_actors():
+@requires_auth('get:actors')
+def get_actors(jwt):
     actors = map(lambda actor: actor.format(), Actor.query.all())
     if actors:
         return jsonify({"success": True, "actors": list(actors)})
@@ -29,7 +30,8 @@ def get_actors():
 
 
 @app.route('/movies', methods=['GET'])
-def get_movies():
+@requires_auth('get:movies')
+def get_movies(jwt):
     movies = map(lambda actor: actor.format(), Movie.query.all())
     if movies:
         return jsonify({"success": True, "movies": list(movies)})
@@ -38,7 +40,7 @@ def get_movies():
 
 @app.route('/actors', methods=['POST'])
 @requires_auth('post:actors')
-def create_actor():
+def create_actor(jwt):
     body = request.get_json(force=True)
     req_name = body.get('name', None)
     req_age = body.get('age', None)
@@ -59,8 +61,8 @@ def create_actor():
 
 
 @app.route('/movies', methods=['POST'])
-# @requires_auth('post:movies')
-def create_movie():
+@requires_auth('post:movies')
+def create_movie(jwt):
     body = request.get_json(force=True)
     req_title = body.get('title', None)
     req_release_date = body.get('release_date', None)
@@ -80,8 +82,8 @@ def create_movie():
 
 
 @app.route('/actors/<int:actor_id>', methods=['PATCH'])
-# @requires_auth('patch:actors')
-def edit_actor(actor_id):
+@requires_auth('patch:actors')
+def edit_actor(jwt, actor_id):
     body = request.get_json(force=True)
     if id is None:
         abort(404)
@@ -112,8 +114,8 @@ def edit_actor(actor_id):
 
 
 @app.route('/movies/<int:movie_id>', methods=['PATCH'])
-# @requires_auth('patch:movies')
-def edit_movie(movie_id):
+@requires_auth('patch:movies')
+def edit_movie(jwt, movie_id):
     body = request.get_json(force=True)
     if id is None:
         abort(404)
@@ -141,8 +143,8 @@ def edit_movie(movie_id):
 
 
 @app.route('/actors/<int:actor_id>', methods=['DELETE'])
-# @requires_auth('delete:actors')
-def remove_actor(actor_id):
+@requires_auth('delete:actors')
+def remove_actor(jwt, actor_id):
     if actor_id is None:
         abort(404)
     try:
@@ -163,8 +165,8 @@ def remove_actor(actor_id):
 
 
 @app.route('/movies/<int:movie_id>', methods=['DELETE'])
-# @requires_auth('delete:movies')
-def remove_movie(movie_id):
+@requires_auth('delete:movies')
+def remove_movie(jwt, movie_id):
     if movie_id is None:
         abort(404)
     try:
