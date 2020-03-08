@@ -1,35 +1,256 @@
-# Coffee Shop Full Stack
+# Spotlight casting agency
 
-## Full Stack Nano - IAM Final Project
+## Live application
+The application is hosted on heroku under the url:
 
-Udacity has decided to open a new digitally enabled cafe for students to order drinks, socialize, and study hard. But they need help setting up their menu experience.
+[https://warm-depths-06997.herokuapp.com/](https://warm-depths-06997.herokuapp.com/)
 
-You have been called on to demonstrate your newly learned skills to create a full stack drink menu application. The application must:
+## Learning purposes
 
-1) Display graphics representing the ratios of ingredients in each drink.
-2) Allow public users to view drink names and graphics.
-3) Allow the shop baristas to see the recipe information.
-4) Allow the shop managers to create new drinks and edit existing drinks.
+The Casting Agency models a company that is responsible for creating movies and managing and assigning actors to those movies. 
+No current frontend available
 
-## Tasks
+## Models:
 
-There are `@TODO` comments throughout project. We recommend tackling the sections in order. Start by reading the READMEs in:
+Movies with attributes title and release date
+Actors with attributes name, age and gender
 
-1. [`./backend/`](./backend/README.md)
-2. [`./frontend/`](./frontend/README.md)
 
-## About the Stack
+##  Roles:
+* Casting Assistant
+    * Can view actors and movies
+* Casting Director
+    * All permissions a Casting Assistant has and…
+    * Add or delete an actor from the database
+    * Modify actors or movies
+* Executive Producer
+    * All permissions a Casting Director has and…
+    * Add or delete a movie from the database
+    
+## Testing
+Test the following endpoints with [Postman](https://getpostman.com) by importing and running [spotlight-casting.postman_collection.json](spotlight-casting.postman_collection.json)
+The collection has added the proper authorizations tokens.
 
-We started the full stack application for you. It is desiged with some key functional areas:
 
-### Backend
+There is also a local backend testing which can be run in the following stps:
+* implement and activate the virtual environment,
+* install the [requirements.txt ](requirements.txt)
+* run python test_app.py;     
 
-The `./backend` directory contains a partially completed Flask server with a pre-written SQLAlchemy module to simplify your data needs. You will need to complete the required endpoints, configure, and integrate Auth0 for authentication.
 
-[View the README.md within ./backend for more details.](./backend/README.md)
+## Endpoints:
 
-### Frontend
+For all the endpoints you need to use a valid access token in the request headers as well as Content-Type to use the endpoints.
+These can be found in the [headers.py](headers.py) document
 
-The `./frontend` directory contains a complete Ionic frontend to consume the data from the Flask server. You will only need to update the environment variables found within (./frontend/src/environment/environment.ts) to reflect the Auth0 configuration details set up for the backend app. 
+### Actors
+```GET /actors ```
 
-[View the README.md within ./frontend for more details.](./frontend/README.md)
+Fetches a list of all actors
+
+Response:
+~~~
+{
+    "actors": [
+        {
+           "age": 24,
+           "gender": "male",
+           "id": 1,
+           "name": "John Smith"
+        }
+    ],
+    "success": true
+}
+
+~~~
+
+```POST /actors ```
+Adds a new actor and returns an updated list of all actors and the success value
+
+Body:
+
+~~~
+{
+    "age": 25,
+    "gender": "Female",
+    "name": "Jane Doe"
+}
+~~~
+
+Response:
+
+~~~
+{
+  "actors": [
+    {
+      "age": 24,
+      "gender": "male",
+      "id": 1,
+      "name": "John Smith"
+    },
+    {
+      "age": 25,
+      "gender": "female",
+      "id": 2,
+      "name": "Jane Doe"
+    }
+  ],
+  "success": true
+}
+
+~~~
+
+
+```PATCH /actors/1 ```
+Edits a specific id actor and returns an updated list of all actors and the success value
+
+Body:
+
+~~~
+{
+    "name": "John Doe"
+}
+~~~
+
+Response:
+
+~~~
+{
+  "actors": [
+    {
+      "age": 24,
+      "gender": "male",
+      "id": 1,
+      "name": "John Doe"
+    },
+    {
+      "age": 25,
+      "gender": "female",
+      "id": 2,
+      "name": "Jane Doe"
+    }
+  ],
+  "success": true
+}
+
+~~~
+
+```DELETE /actors/1 ```
+Removes a specific id actor and returns an updated list of all remaining actors and the success value
+
+Response:
+
+~~~
+{
+  "actors": [
+    {
+      "age": 25,
+      "gender": "female",
+      "id": 2,
+      "name": "Jane Doe"
+    }
+  ],
+  "success": true
+}
+
+~~~
+### Movies
+```GET /movies ```
+Fetches a list of all movies
+
+Response:
+~~~
+{
+  "movies": [
+    {
+      "id": 1,
+      "release_date": "2018-03-29 00:00:00",
+      "title": "The tornado"
+    }
+  ],
+  "success": true
+}
+~~~
+
+
+```POST /movies ```
+Adds a new movie and returns an updated list of all movies and the success value
+
+Body:
+
+~~~
+{
+    "title": "The tornado",
+    "release_date": "2018-03-29"
+}
+~~~
+
+Response:
+
+~~~
+{
+  "movies": [
+    {
+      "id": 1,
+      "release_date": "2016-03-02 00:00:00",
+      "title": "The cottage"
+    },
+    {
+      "id": 2,
+      "release_date": "2018-03-29 00:00:00",
+      "title": "The tornado"
+    }
+  ],
+  "success": true
+}
+~~~
+
+
+```PATCH /movies/1 ```
+Edits a specific id movie and returns an updated list of all movies and the success value
+
+Body:
+
+~~~
+{
+    "title": "The cottage 2",
+}
+~~~
+
+Response:
+
+~~~
+{
+  "movies": [
+    {
+      "id": 1,
+      "release_date": "2016-03-02 00:00:00",
+      "title": "The cottage 2"
+    },
+    {
+      "id": 2,
+      "release_date": "2018-03-29 00:00:00",
+      "title": "The tornado"
+    }
+  ],
+  "success": true
+}
+~~~
+
+```DELETE /movies/1 ```
+Removes a specific id movie and returns an updated list of all remaining movies and the success value
+
+Response:
+
+~~~
+{
+  "movies": [
+    {
+      "id": 2,
+      "release_date": "2018-03-29 00:00:00",
+      "title": "The tornado"
+    }
+  ],
+  "success": true
+}
+~~~
