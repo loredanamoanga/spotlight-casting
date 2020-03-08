@@ -3,7 +3,7 @@
 ## Live application
 The application is hosted on heroku under the url:
 
-[https://warm-depths-06997.herokuapp.com/](https://warm-depths-06997.herokuapp.com/)
+[https://spotlight-casting.herokuapp.com/](https://spotlight-casting.herokuapp.com/)
 
 ## Learning purposes
 
