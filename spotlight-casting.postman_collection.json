@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "568741bb-5f32-4b9d-99fc-fd0155577c1f",
+		"_postman_id": "09e05175-2e3f-4e15-bb1d-1f6db921f381",
 		"name": "spotlight-casting",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1284,9 +1284,9 @@
 	],
 	"variable": [
 		{
-			"id": "213290f5-22c1-418a-95e5-8eaa14307cee",
+			"id": "db042df7-bae1-4e04-8272-f19962dc54f2",
 			"key": "host",
-			"value": "https://warm-depths-06997.herokuapp.com",
+			"value": "https://spotlight-casting.herokuapp.com",
 			"type": "string"
 		}
 	],
