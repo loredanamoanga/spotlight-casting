@@ -58,13 +58,13 @@ class SpotlightTestCase(unittest.TestCase):
         """Executed after reach test"""
         db_drop_and_create_all()
         pass
-
     def test_post_without_proper_credentials(self):
         res = self.client.post("/actors",
                                headers=casting_assistant,
                                content_type="application/json",
                                data=json.dumps(self.new_actor))
         self.assertEqual(res.status_code, 401)
+
 
     def test_get_actors(self):
         res = self.client.get('/actors', headers=executive_producer)
