@@ -15,7 +15,6 @@ No current frontend available
 Movies with attributes title and release date
 Actors with attributes name, age and gender
 
-
 ##  Roles:
 * Casting Assistant
     * Can view actors and movies
@@ -36,7 +35,6 @@ There is also a local backend testing which can be run in the following stps:
 * implement and activate the virtual environment,
 * install the [requirements.txt ](requirements.txt)
 * run python test_app.py;     
-
 
 ## Endpoints:
 
