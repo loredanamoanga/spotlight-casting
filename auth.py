@@ -88,7 +88,7 @@ def check_permissions(permission, payload):
         raise AuthError('Invalid Header - Permissions not in payload/JWT', 400)
 
     if permission not in payload['permissions']:
-        raise AuthError('unauthorized', 401)
+        raise AuthError('Unauthorized', 401)
 
 
 '''

@@ -8,16 +8,19 @@ project_dir = os.path.abspath(os.path.dirname(__file__))
 database_path = os.environ.get('DATABASE_URL')
 db = SQLAlchemy()
 
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 
 def setup_db(app):
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or \
+                                            'sqlite:///' + os.path.join(basedir, 'test/spotlight.db')
+
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)
 
 
 def db_drop_and_create_all():
-    print("i am being called")
     db.drop_all()
     db.create_all()
 
@@ -29,7 +32,7 @@ class Actor(db.Model):
     age = Column(Integer())
     gender = Column(String)
 
-    def format(self):
+    def format_actor(self):
         return {
             "id": self.id,
             "name": self.name,
@@ -58,7 +61,7 @@ class Movie(db.Model):
     title = Column(String)
     release_date = Column(db.DateTime())
 
-    def format(self):
+    def format_movie(self):
         return {
             "id": self.id,
             "title": self.title,
